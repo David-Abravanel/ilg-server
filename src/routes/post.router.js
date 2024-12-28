@@ -12,9 +12,10 @@ postRouter.get("/", PostController.getAllPosts);
 postRouter.get("/:id", validatePostId, PostController.getPostById);
 postRouter.post("/", validatePostBody, PostController.createPost);
 postRouter.post("/fetch", PostController.fetchExternalPosts);
+postRouter.delete("/delete-all", PostController.deleteAll);
 postRouter.delete("/delete/:id", validatePostId, PostController.deletePost);
 postRouter.patch(
-  "/update/:postId/field",
+  "/update/:postId",
   validateUpdateField,
   PostController.updatePost
 );

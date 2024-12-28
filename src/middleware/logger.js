@@ -16,7 +16,7 @@ export const logger = (req, res, next) => {
 
     console.log(
       `[${methodColored(req.method)}]: ${chalk.gray(
-        `http://localhost:${process.env.FE_PORT}${req.originalUrl}`
+        `http://localhost:${process.env.BE_PORT}${req.originalUrl}`
       )}  ${chalk.gray(":::")}   [${chalk.yellow("Request")}]`
     );
 
@@ -25,7 +25,7 @@ export const logger = (req, res, next) => {
       const statusColor = res.statusCode < 400 ? chalk.green : chalk.red;
       console.log(
         `[${methodColored(req.method)}]: ${statusColor(
-          `http://localhost:${process.env.FE_PORT}${req.originalUrl}`
+          `http://localhost:${process.env.BE_PORT}${req.originalUrl}`
         )}  ${chalk.gray(":::")}  status: ${statusColor(res.statusCode)}`
       );
     });

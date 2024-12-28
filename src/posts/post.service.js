@@ -41,11 +41,9 @@ export class PostService {
     }
   }
 
-  static async deleteField(id) {
+  static async deleteAll() {
     try {
-      const [result] = await pool.execute(`DELETE FROM posts WHERE id = ?`, [
-        id,
-      ]);
+      const [result] = await pool.execute("DELETE FROM posts");
 
       if (result.affectedRows === 0) {
         throw new Error("Post not found");
@@ -80,7 +78,7 @@ export class PostService {
       for (const post of posts) {
         await this.create(post.userId, post.title, post.body);
       }
-      return posts.length;
+      return await this.findAll();
     } catch (error) {
       throw new Error(`Failed to fetch and store posts: ${error.message}`);
     }

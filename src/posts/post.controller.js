@@ -5,10 +5,7 @@ export class PostController {
   static async getAllPosts(req, res, next) {
     try {
       const posts = await PostService.findAll();
-      res.json({
-        status: "success",
-        data: posts,
-      });
+      res.json(posts);
     } catch (error) {
       next(error);
     }
@@ -72,13 +69,22 @@ export class PostController {
     }
   }
 
+  static async deleteAll(req, res, next) {
+    try {
+      const result = await PostService.deleteAll();
+      res.status(201).json({
+        status: result ? "success" : result,
+        message: `Successfully delete all posts from table posts`,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async fetchExternalPosts(req, res, next) {
     try {
-      const count = await PostService.fetchAndStorePosts();
-      res.json({
-        status: "success",
-        message: `Successfully imported ${count} posts`,
-      });
+      const posts = await PostService.fetchAndStorePosts();
+      res.status(201).json(posts);
     } catch (error) {
       next(error);
     }
